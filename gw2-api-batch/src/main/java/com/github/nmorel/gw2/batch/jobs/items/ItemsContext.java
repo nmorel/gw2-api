@@ -6,11 +6,13 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.step.builder.SimpleStepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
 
 @Configuration
 public class ItemsContext
@@ -47,12 +49,15 @@ public class ItemsContext
     public Step step1( StepBuilderFactory stepBuilderFactory, ItemReader<Integer> reader,
                        ItemWriter<DBObject> writer, ItemProcessor<Integer, DBObject> processor )
     {
-        return stepBuilderFactory.get("step1")
-                .<Integer, DBObject>chunk(1)
-                .reader(reader)
-                .processor(processor)
-                .writer(writer)
-                .build();
+        SimpleStepBuilder<Integer, DBObject> builder =
+                stepBuilderFactory.get("step1")
+                        .<Integer, DBObject>chunk(1)
+                        .reader(reader)
+                        .processor(processor)
+                        .writer(writer);
+        builder.throttleLimit(10);
+        builder.taskExecutor(new SimpleAsyncTaskExecutor("items"));
+        return builder.build();
     }
 
 }
