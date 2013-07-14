@@ -5,6 +5,7 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.builder.SimpleStepBuilder;
 import org.springframework.batch.item.ItemProcessor;
@@ -18,13 +19,14 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 public class ItemsContext
 {
     @Bean
-    ItemReader<Integer> itemReader()
+    ItemReader<String> itemReader()
     {
         return new ItemsReader();
     }
 
     @Bean
-    ItemProcessor<Integer, DBObject> itemProcess()
+    @StepScope
+    ItemProcessor<String, DBObject> itemProcess()
     {
         return new ItemsProcessor();
     }
@@ -46,12 +48,12 @@ public class ItemsContext
     }
 
     @Bean
-    public Step step1( StepBuilderFactory stepBuilderFactory, ItemReader<Integer> reader,
-                       ItemWriter<DBObject> writer, ItemProcessor<Integer, DBObject> processor )
+    public Step step1( StepBuilderFactory stepBuilderFactory, ItemReader<String> reader,
+                       ItemWriter<DBObject> writer, ItemProcessor<String, DBObject> processor )
     {
-        SimpleStepBuilder<Integer, DBObject> builder =
+        SimpleStepBuilder<String, DBObject> builder =
                 stepBuilderFactory.get("step1")
-                        .<Integer, DBObject>chunk(1)
+                        .<String, DBObject>chunk(1)
                         .reader(reader)
                         .processor(processor)
                         .writer(writer);

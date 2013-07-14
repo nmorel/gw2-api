@@ -1,0 +1,17 @@
+{
+    "_id": "26706",
+    "en": {
+        "name": "Dragonshot",
+        "description": "",
+        "type": "Weapon",
+        "level": "80",
+        "rarity": "Exotic"
+    },
+    "fr": {
+        "name": "Tir de dragon",
+        "description": "",
+        "type": "Weapon",
+        "level": "80",
+        "rarity": "Exotic"
+    }
+}

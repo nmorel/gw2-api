@@ -1,0 +1,17 @@
+{
+    "_id": "12546",
+    "en": {
+        "name": "Lemongrass",
+        "description": "Ingredient",
+        "type": "CraftingMaterial",
+        "level": "80",
+        "rarity": "Basic"
+    },
+    "fr": {
+        "name": "Citronnelle",
+        "description": "Ingrédient",
+        "type": "CraftingMaterial",
+        "level": "80",
+        "rarity": "Basic"
+    }
+}

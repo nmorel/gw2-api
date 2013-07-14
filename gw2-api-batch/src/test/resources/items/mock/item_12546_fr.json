@@ -1,0 +1,19 @@
+{
+    "item_id": "12546",
+    "name": "Citronnelle",
+    "description": "Ingrédient",
+    "type": "CraftingMaterial",
+    "level": "80",
+    "rarity": "Basic",
+    "vendor_value": "9",
+    "game_types": [
+        "Activity",
+        "Dungeon",
+        "Pve",
+        "Wvw"
+    ],
+    "flags": [
+    ],
+    "restrictions": [
+    ]
+}

@@ -2,6 +2,7 @@ package com.github.nmorel.gw2.batch.config;
 
 import com.github.nmorel.spring.batch.mongodb.configuration.annotation.MongoDbBatchConfigurer;
 import com.github.nmorel.spring.batch.mongodb.explore.support.MongoDbJobExplorerFactoryBean;
+import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.mongodb.DB;
@@ -60,7 +61,13 @@ public class CommonBatchContext
     @Bean
     HttpTransport httpTransport() throws GeneralSecurityException
     {
-        return new NetHttpTransport.Builder().doNotValidateCertificate().build();
+        return new NetHttpTransport.Builder().build();
+    }
+
+    @Bean
+    HttpRequestFactory httpRequestFactory() throws GeneralSecurityException
+    {
+        return httpTransport().createRequestFactory();
     }
 
 }

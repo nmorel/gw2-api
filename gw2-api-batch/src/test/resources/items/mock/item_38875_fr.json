@@ -1,0 +1,47 @@
+{
+    "item_id": "38875",
+    "name": "Arc tribal de voyageur",
+    "description": "",
+    "type": "Weapon",
+    "level": "80",
+    "rarity": "Exotic",
+    "vendor_value": "396",
+    "game_types": [
+        "Activity",
+        "Dungeon",
+        "Pve",
+        "Wvw"
+    ],
+    "flags": [
+        "AccountBound",
+        "SoulBindOnUse"
+    ],
+    "restrictions": [
+    ],
+    "weapon": {
+        "type": "LongBow",
+        "damage_type": "Physical",
+        "min_power": "920",
+        "max_power": "1080",
+        "defense": "0",
+        "infusion_slots": [
+        ],
+        "infix_upgrade": {
+            "buff": {
+                "skill_id": "863",
+                "description": "+3% Découverte de magie"
+            },
+            "attributes": [
+                {
+                    "attribute": "Toughness",
+                    "modifier": "128"
+                },
+                {
+                    "attribute": "Vitality",
+                    "modifier": "128"
+                }
+            ]
+        },
+        "suffix_item_id": ""
+    }
+}

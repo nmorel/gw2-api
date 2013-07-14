@@ -1,0 +1,17 @@
+{
+    "_id": "38875",
+    "en": {
+        "name": "Wayfarer's Tribal Bow",
+        "description": "",
+        "type": "Weapon",
+        "level": "80",
+        "rarity": "Exotic"
+    },
+    "fr": {
+        "name": "Arc tribal de voyageur",
+        "description": "",
+        "type": "Weapon",
+        "level": "80",
+        "rarity": "Exotic"
+    }
+}
