@@ -1,11 +1,10 @@
 package com.github.nmorel.gw2.batch.jobs.items;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.nmorel.gw2.batch.config.ApplicationDatabase;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DB;
@@ -28,6 +27,9 @@ public class ItemsProcessor implements ItemProcessor<String, DBObject>
 
     @Inject
     private HttpRequestFactory requestFactory;
+
+    @Inject
+    private ObjectMapper objectMapper;
 
     @Inject
     @ApplicationDatabase
@@ -71,7 +73,7 @@ public class ItemsProcessor implements ItemProcessor<String, DBObject>
                 .buildGetRequest(new GenericUrl(apiHost + "item_details.json").set("item_id", itemId).set("lang", lang))
                 .execute();
 
-        Item item = new Gson().fromJson(new JsonReader(new InputStreamReader(response.getContent())), Item.class);
+        Item item = objectMapper.readValue(new InputStreamReader(response.getContent()), Item.class);
 
         DBObject res = BasicDBObjectBuilder.start("name", item.getName())
                 .add("description", item.getDescription()).add("type", item.getType()).add("level", item.getLevel())

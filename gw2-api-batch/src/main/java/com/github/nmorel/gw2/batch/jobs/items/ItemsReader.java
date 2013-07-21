@@ -1,10 +1,9 @@
 package com.github.nmorel.gw2.batch.jobs.items;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpResponse;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ExecutionContext;
@@ -27,6 +26,9 @@ public class ItemsReader implements ItemReader<String>, ItemStream
     @Inject
     private HttpRequestFactory requestFactory;
 
+    @Inject
+    private ObjectMapper objectMapper;
+
     @Value( "${gw2.api.host}" )
     private String apiHost;
 
@@ -40,7 +42,7 @@ public class ItemsReader implements ItemReader<String>, ItemStream
             logger.debug("Retrieving the ids of all items");
             HttpResponse response = requestFactory
                     .buildGetRequest(new GenericUrl(apiHost + "items.json")).execute();
-            Items items = new Gson().fromJson(new JsonReader(new InputStreamReader(response.getContent())), Items.class);
+            Items items = objectMapper.readValue(new InputStreamReader(response.getContent()), Items.class);
             iterator = items.getItems().iterator();
             logger.info("{} items to process", items.getItems().size());
         }

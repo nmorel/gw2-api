@@ -1,5 +1,6 @@
 package com.github.nmorel.gw2.batch.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.nmorel.spring.batch.mongodb.configuration.annotation.MongoDbBatchConfigurer;
 import com.github.nmorel.spring.batch.mongodb.explore.support.MongoDbJobExplorerFactoryBean;
 import com.google.api.client.http.HttpRequestFactory;
@@ -37,8 +38,8 @@ public class CommonBatchContext
     }
 
     @Bean
-    JobOperator jobOperator( final JobLauncher jobLauncher, final JobExplorer jobExplorer,
-                             final JobRepository jobRepository, final JobRegistry jobRegistry )
+    public JobOperator jobOperator( final JobLauncher jobLauncher, final JobExplorer jobExplorer,
+                                    final JobRepository jobRepository, final JobRegistry jobRegistry )
     {
         return new SimpleJobOperator()
         {{
@@ -50,7 +51,7 @@ public class CommonBatchContext
     }
 
     @Bean
-    JobRegistryBeanPostProcessor jobRegisterBeanPostProcess( final JobRegistry jobRegistry )
+    public JobRegistryBeanPostProcessor jobRegisterBeanPostProcess( final JobRegistry jobRegistry )
     {
         return new JobRegistryBeanPostProcessor()
         {{
@@ -59,15 +60,21 @@ public class CommonBatchContext
     }
 
     @Bean
-    HttpTransport httpTransport() throws GeneralSecurityException
+    public HttpTransport httpTransport() throws GeneralSecurityException
     {
         return new NetHttpTransport.Builder().build();
     }
 
     @Bean
-    HttpRequestFactory httpRequestFactory() throws GeneralSecurityException
+    public HttpRequestFactory httpRequestFactory() throws GeneralSecurityException
     {
         return httpTransport().createRequestFactory();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper()
+    {
+        return new ObjectMapper();
     }
 
 }

@@ -1,11 +1,7 @@
-package com.github.nmorel.gw2.batch.jobs.items;
+package com.github.nmorel.gw2.server.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-/**
- */
-@JsonIgnoreProperties( ignoreUnknown = true )
-public class Item
+/** @author Nicolas Morel */
+public class ItemByLang
 {
     private String name;
 
