@@ -25,7 +25,7 @@ public class ItemController extends AbstractController
     }
 
     @RequestMapping( value = "/item/{id}", method = RequestMethod.GET, produces = MEDIA_TYPE_JSON_UTF8 )
-    public @ResponseBody Item getById( @PathVariable int id )
+    public @ResponseBody Item getById( @PathVariable String id )
     {
         return itemRepo.findOne(id);
     }
